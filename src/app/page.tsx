@@ -49,9 +49,14 @@ export default function Home() {
               </p>
             </SignedOut>
             <SignedIn>
-              <a href="/dashboard" className="inline-block px-8 py-4 bg-black text-white text-lg font-medium rounded hover:bg-gray-800 hover:scale-105 hover:shadow-lg transition-all duration-300 transform cursor-pointer">
-                Continue to Dashboard
-              </a>
+              <div className="space-x-4">
+                <a href="/dashboard" className="inline-block px-8 py-4 bg-black text-white text-lg font-medium rounded hover:bg-gray-800 hover:scale-105 hover:shadow-lg transition-all duration-300 transform cursor-pointer">
+                  Continue to Dashboard
+                </a>
+                <a href="/blueprint/demo" className="inline-block px-8 py-4 border-2 border-black text-black text-lg font-medium rounded hover:bg-black hover:text-white hover:scale-105 hover:shadow-lg transition-all duration-300 transform cursor-pointer">
+                  View Demo Blueprint
+                </a>
+              </div>
             </SignedIn>
           </div>
 
