@@ -91,6 +91,7 @@ export async function generateKeyFeatures(context: {
   customerType: string;
   problem: string;
   selectedFeatures?: string[];
+  requestSingleSuggestion?: boolean;
 }): Promise<{
   title: string;
   description: string;
@@ -98,6 +99,7 @@ export async function generateKeyFeatures(context: {
 }> {
   const isExternal = context.customerType === "external";
   const hasSelectedFeatures = context.selectedFeatures && context.selectedFeatures.length > 0;
+  const requestSingle = context.requestSingleSuggestion === true;
   
   const selectedFeaturesText = hasSelectedFeatures 
     ? `\nALREADY SELECTED DIFFERENTIATORS: ${context.selectedFeatures!.join(', ')}`
@@ -120,13 +122,13 @@ Requirements:
     : "Generate core differentiators that solve the problem better than existing solutions"}
 4. Focus on ${isExternal ? "unique value customers choose over competitors" : "operational advantages superior to current processes"}
 5. What makes this 10x better, faster, cheaper, or more convenient
-6. 4 specific competitive advantages
+6. ${requestSingle ? "1 SHORT competitive advantage" : "4 SHORT competitive advantages"} - each should be 2-6 words max, like "Auto flag harmful content" or "10x faster processing"
 
 Respond in JSON format:
 {
   "title": "short differentiator prompt (3-6 words)",
   "description": "what makes this solution uniquely valuable",
-  "suggestions": ["Differentiator 1: unique advantage", "Differentiator 2: unique advantage", "Differentiator 3: unique advantage", "Differentiator 4: unique advantage"]
+  "suggestions": [${requestSingle ? '"Single short phrase"' : '"Short phrase 1", "Short phrase 2", "Short phrase 3", "Short phrase 4"'}]
 }`;
 
   try {
@@ -161,17 +163,19 @@ Respond in JSON format:
       description: isExternal 
         ? "What makes your solution different from competitors"
         : "Why this solution beats current processes",
-      suggestions: isExternal ? [
-        "10x faster processing: Minutes instead of hours",
-        "Smart recommendations: Guidance competitors don't provide", 
-        "Zero-setup deployment: Start instantly without training",
-        "Predictive insights: See trends before competitors"
-      ] : [
-        "One-click automation: Eliminate 90% of manual work",
-        "Real-time collaboration: Instant team sync",
-        "Smart integrations: Connect existing tools effortlessly", 
-        "Predictive maintenance: Prevent issues before they happen"
-      ]
+      suggestions: requestSingle 
+        ? (isExternal ? ["10x faster processing"] : ["One-click automation"])
+        : (isExternal ? [
+            "10x faster processing",
+            "Smart AI recommendations", 
+            "Zero-setup deployment",
+            "Predictive market insights"
+          ] : [
+            "One-click automation",
+            "Real-time team collaboration",
+            "Smart tool integrations", 
+            "Predictive issue prevention"
+          ])
     };
   }
 }

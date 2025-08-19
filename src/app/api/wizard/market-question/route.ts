@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { customerType, problem, selectedFeatures } = body;
+    const { customerType, problem, selectedFeatures, requestSingleSuggestion } = body;
 
     if (!customerType || !problem) {
       return NextResponse.json(
@@ -24,6 +24,7 @@ export async function POST(request: NextRequest) {
       customerType,
       problem,
       selectedFeatures,
+      requestSingleSuggestion,
     });
 
     return NextResponse.json(result);
