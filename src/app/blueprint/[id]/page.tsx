@@ -8,12 +8,9 @@ import {
   ClockIcon,
   PlayIcon,
   ShareIcon,
-  DownloadIcon,
-  UndoIcon,
-  RedoIcon,
-  BoldIcon,
-  ItalicIcon,
-  UnderlineIcon,
+  ArrowDownTrayIcon,
+  ArrowUturnLeftIcon,
+  ArrowUturnRightIcon,
   LinkIcon,
   ListBulletIcon
 } from '@heroicons/react/24/outline';
@@ -177,10 +174,10 @@ export default function BlueprintPage({ params }: { params: { id: string } }) {
             {/* History Controls */}
             <div className="flex items-center gap-1">
               <button className="p-2 hover:bg-gray-100 rounded transition-colors">
-                <UndoIcon className="w-4 h-4 text-gray-600" />
+                <ArrowUturnLeftIcon className="w-4 h-4 text-gray-600" />
               </button>
               <button className="p-2 hover:bg-gray-100 rounded transition-colors">
-                <RedoIcon className="w-4 h-4 text-gray-600" />
+                <ArrowUturnRightIcon className="w-4 h-4 text-gray-600" />
               </button>
             </div>
             
@@ -195,13 +192,13 @@ export default function BlueprintPage({ params }: { params: { id: string } }) {
               
               <div className="flex items-center gap-1">
                 <button className="p-1 hover:bg-gray-100 rounded transition-colors">
-                  <BoldIcon className="w-4 h-4 text-gray-600" />
+                  <span className="w-4 h-4 text-gray-600 text-sm font-bold">B</span>
                 </button>
                 <button className="p-1 hover:bg-gray-100 rounded transition-colors">
-                  <ItalicIcon className="w-4 h-4 text-gray-600" />
+                  <span className="w-4 h-4 text-gray-600 text-sm italic">I</span>
                 </button>
                 <button className="p-1 hover:bg-gray-100 rounded transition-colors">
-                  <UnderlineIcon className="w-4 h-4 text-gray-600" />
+                  <span className="w-4 h-4 text-gray-600 text-sm underline">U</span>
                 </button>
                 <button className="p-1 hover:bg-gray-100 rounded transition-colors">
                   <LinkIcon className="w-4 h-4 text-gray-600" />
@@ -221,7 +218,7 @@ export default function BlueprintPage({ params }: { params: { id: string } }) {
               <ShareIcon className="w-4 h-4 text-gray-600" />
             </button>
             <button className="bg-black text-white px-4 py-2 rounded text-sm hover:bg-gray-800 transition-colors font-medium">
-              <DownloadIcon className="w-4 h-4 inline mr-2" />
+              <ArrowDownTrayIcon className="w-4 h-4 inline mr-2" />
               Export
             </button>
           </div>
