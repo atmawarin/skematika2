@@ -44,46 +44,46 @@ function SectionGroup({ title, sections, currentSectionId, onSectionSelect }: Se
   const getStatusIcon = (status: SectionStatus) => {
     switch (status) {
       case 'complete':
-        return <CheckIcon className="w-4 h-4 text-green-600" />;
+        return <CheckIcon className="w-3 h-3 text-green-600" />;
       case 'generating': 
         return (
-          <div className="w-4 h-4 border-2 border-blue-400 border-t-transparent rounded-full animate-spin" />
+          <div className="w-3 h-3 border border-blue-400 border-t-transparent rounded-full animate-spin" />
         );
       case 'pending':
-        return <ClockIcon className="w-4 h-4 text-gray-400" />;
+        return <ClockIcon className="w-3 h-3 text-gray-400" />;
       default:
-        return <ClockIcon className="w-4 h-4 text-gray-400" />;
+        return <ClockIcon className="w-3 h-3 text-gray-400" />;
     }
   };
 
   return (
-    <div className="mb-2">
+    <div className="mb-1">
       <button 
         onClick={() => setIsExpanded(!isExpanded)}
-        className="flex items-center gap-2 w-full p-2 text-left hover:bg-gray-50 rounded-lg group"
+        className="flex items-center gap-2 w-full py-1 px-2 text-left hover:bg-gray-50 rounded group"
       >
         {isExpanded ? (
-          <ChevronDownIcon className="w-4 h-4 text-gray-500" />
+          <ChevronDownIcon className="w-3 h-3 text-gray-500" />
         ) : (
-          <ChevronRightIcon className="w-4 h-4 text-gray-500" />
+          <ChevronRightIcon className="w-3 h-3 text-gray-500" />
         )}
-        <span className="text-sm font-medium text-gray-900">{title}</span>
+        <span className="text-xs font-medium text-gray-900">{title}</span>
       </button>
       
       {isExpanded && (
-        <div className="ml-6 space-y-1">
+        <div className="ml-5 space-y-0.5 mt-1">
           {sections.map((section) => (
             <button
               key={section.id}
               onClick={() => onSectionSelect(section.id)}
-              className={`flex items-center gap-3 w-full p-2 rounded-lg text-left transition-colors ${
+              className={`flex items-center gap-2 w-full py-1.5 px-2 rounded text-left transition-colors ${
                 currentSectionId === section.id 
                   ? 'bg-blue-50 text-blue-900 border border-blue-200' 
                   : 'hover:bg-gray-50 text-gray-700'
               }`}
             >
               {getStatusIcon(section.status)}
-              <span className="text-sm">{section.content.title}</span>
+              <span className="text-xs truncate">{section.content.title}</span>
             </button>
           ))}
         </div>
@@ -117,28 +117,23 @@ export default function BlueprintPage({ params }: { params: { id: string } }) {
     <div className="h-screen flex bg-white">
       {/* Left Sidebar - Section Navigation */}
       <aside className="w-80 bg-white border-r border-gray-200 flex flex-col">
-        <div className="p-6 border-b border-gray-100">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-8 h-8 bg-green-600 rounded flex items-center justify-center">
-              <CheckIcon className="w-4 h-4 text-white" />
+        <div className="p-4 border-b border-gray-100">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-6 h-6 bg-green-600 rounded flex items-center justify-center">
+              <CheckIcon className="w-3 h-3 text-white" />
             </div>
-            <h1 className="text-xl font-semibold text-gray-900">Business Plan</h1>
+            <h1 className="text-sm font-medium text-gray-900">{dummyBlueprint.title}</h1>
           </div>
           
-          {/* Blueprint Title */}
-          <div className="mb-4">
-            <h2 className="text-lg font-medium text-gray-900 mb-1">
-              {dummyBlueprint.title}
-            </h2>
-            <p className="text-sm text-gray-500">
-              Last edited {dummyBlueprint.lastEditedAt.toLocaleDateString()}
-            </p>
+          {/* Compact Status */}
+          <div className="text-xs text-gray-500">
+            Last edited {dummyBlueprint.lastEditedAt.toLocaleDateString()}
           </div>
         </div>
         
         {/* Section Navigation */}
-        <nav className="flex-1 p-4 overflow-y-auto">
-          <div className="space-y-1">
+        <nav className="flex-1 p-3 overflow-y-auto">
+          <div className="space-y-0.5">
             {sectionGroups.map((group, index) => (
               <SectionGroup
                 key={index}
@@ -152,14 +147,14 @@ export default function BlueprintPage({ params }: { params: { id: string } }) {
         </nav>
         
         {/* Bottom Actions */}
-        <div className="p-4 border-t border-gray-100">
-          <div className="space-y-2">
-            <button className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors">
-              <PlayIcon className="w-4 h-4" />
-              Generate Missing Sections
+        <div className="p-3 border-t border-gray-100">
+          <div className="space-y-1">
+            <button className="w-full flex items-center gap-2 px-2 py-1.5 text-xs text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded transition-colors">
+              <PlayIcon className="w-3 h-3" />
+              Generate Missing
             </button>
-            <button className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors">
-              <ShareIcon className="w-4 h-4" />
+            <button className="w-full flex items-center gap-2 px-2 py-1.5 text-xs text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded transition-colors">
+              <ShareIcon className="w-3 h-3" />
               Share Blueprint
             </button>
           </div>
